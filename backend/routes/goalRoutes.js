@@ -6,8 +6,8 @@ const {
   updateGoals,
   deleteGoals,
 } = require('../controllers/goalController');
-
-router.route('/').get(getGoals).post(setGoal);
-router.route('/:id').put(updateGoals).delete(deleteGoals);
+const { protect } = require('../middelware/authMiddleware');
+router.route('/').get(protect, getGoals).post(protect, setGoal);
+router.route('/:id').put(protect, updateGoals).delete(protect, deleteGoals);
 
 module.exports = router;
